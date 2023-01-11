@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>chatter</title>
+  <style>
+  body{background:lightblue;} 
+  
+    header {
+      font-family: 'Poppins', sans-serif;
+      border: 1px solid lightblue;
+      box-shadow: 1px 1px 5px black;
+      text-align: center;
+      background-color: #2596be;
+      border-radius : 5px;
+    }
+    
+    #chatlog{
+    border:1px solid skyblue;
+    margin-top:10px;} 
+    
+    #question{
+      margin : 10px 0px 0px 0px;} 
+      
+  </style>
+</head>
+
+<body>
+<header id="header">
+  <h3>CHAT BOX </h3>
+ </header>
+  
+  <div id="chatlog">
+    <!-- <h3>hello world how </h3>
+    <h3>PROFILE SUMMARY is </h3> -->
+  </div>
+  <div>
+
+    <input type="text" id="question">
+    <button id="ok" type="submit"> send </button>
+   
+  </div>
+  <script>
+  let button= document.getElementById("ok");
+
+  const options = {
+	method: 'POST',
+	headers: {
+		'content-type': 'application/json',
+		'X-RapidAPI-Key': 'f11efaaf94mshc50d1cbbfa6f026p1b2da2jsn225a0764a5f5',
+		'X-RapidAPI-Host': 'waifu.p.rapidapi.com'
+	},
+	body: '{}'
+};
+
+button.onclick = () => {
+let question = document.getElementById('question').value;
+document.getElementById('question').value= "";
+document.getElementById('chatlog').innerHTML+="you : " + question + "<br>";
+
+fetch("https://waifu.p.rapidapi.com/path?user_id=user_id_1&message=" + question + "&from_name=Boy&to_name=riya&situation=Girl%20loves%20Boy.&translate_from=auto&translate_to=auto", options)
+	.then(response => response.text())
+	.then(response => {
+	  document.getElementById('chatlog').innerHTML+= " ❤️ : " + response + '<br>';
+	})
+	.catch(err => console.error(err));}
+	
+  </script>
+
+</body>
+
+</html>
